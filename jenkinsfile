@@ -6,11 +6,7 @@ pipeline {
                 git branch:'main', url:  'https://github.com/Faqs1/tubes_komputasi.git'
             }
         }
-        stage('Install Dependencies') {
-            steps {
-                sh 'ansible-galaxy install -r requirements.yml'
-            }
-        }
+     
         stage('Run Ansible Playbook') {
             steps {
                 ansiblePlaybook credentialsId: 'mariadb-private-key', inventory: 'hosts', playbook: 'mariadb.yml'
