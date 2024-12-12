@@ -9,7 +9,7 @@ pipeline {
      
         stage('Run Ansible Playbook') {
             steps {
-                 bat 'mariadb.yml -i hosts'
+               bat 'ansible-playbook playbooks/mariadb.yml -i hosts'
             }
         }
     }
