@@ -9,7 +9,7 @@ pipeline {
      
         stage('Run Ansible Playbook') {
             steps {
-               ansiblePlaybook credentialsId: 'Faiqrizki', inventory: 'hosts', playbook: 'playbooks/mariadb.yml'
+               credentialsId: 'Faiqrizki', inventory: 'hosts', playbook: 'playbooks/mariadb.yml'
 
             }
         }
