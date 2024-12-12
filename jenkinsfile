@@ -9,7 +9,7 @@ pipeline {
      
         stage('Run Ansible Playbook') {
             steps {
-                ansiblePlaybook credentialsId: 'mariadb-private-key', inventory: 'hosts', playbook: 'mariadb.yml'
+                 bat 'ansible-playbook playbooks/mariadb.yml -i hosts'
             }
         }
     }
