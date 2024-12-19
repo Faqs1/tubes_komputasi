@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                git credentialsId: 'b6dc3518-4b6e-4774-a292-d5aeda03de68',git 'https://github.com/tubes_komputasi.git'
+                git credentialsId: 'appPassword',git 'https://github.com/tubes_komputasi.git'
                 sh 'mvn clean install' 
             }
         }
