@@ -12,7 +12,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    docker.build('your-image-name').push('your-docker-repo/your-image-name')
+                    docker.build('tubes').push('tubes')
                 }
             }
         }
