@@ -1,25 +1,37 @@
 pipeline {
     agent any
+
     stages {
-        stage('Clone Repository') {
+        stage('Build') {
             steps {
-                git branch:'main', url:  'https://github.com/Faqs1/tubes_komputasi.git'
+                git 'https://github.com/tubes_komputasi.git'
+                sh 'mvn clean install' 
             }
         }
-     
-        stage('Run Ansible Playbook') {
-            steps {
-              ansibleplaybook credentialsId: 'b6dc3518-4b6e-4774-a292-d5aeda03de68', inventory: 'hosts', playbook: 'mariadb.yml'
 
+        stage('Deploy') {
+            steps {
+                script {
+                    docker.build('your-image-name').push('your-docker-repo/your-image-name')
+                }
+            }
+        }
+
+        stage('Operate') {
+            steps {
+                script {
+                    // Menjalankan playbook Ansible
+                    ansiblePlaybook credentialsId: 'your-ansible-credentials-id', inventory: 'path/to/your/inventory', playbook: 'path/to/your/playbook.yml'
+                }
             }
         }
     }
+
     post {
-        success {
-            echo 'Deployment successful!'
-        }
-        failure {
-            echo 'Deployment failed!'
+        always {
+            archiveArtifacts artifacts: '**/target/*.jar', allowEmptyArchive: true
+            junit 'target/surefire-reports/*.xml'
         }
     }
 }
+
