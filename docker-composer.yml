@@ -26,7 +26,7 @@ services:
     networks:
       - laravel
     ports:
-      - "3306:3306"
+      - " 8060:60"
 
   webserver:
     image: nginx:alpine
