@@ -16,15 +16,6 @@ pipeline {
                 }
             }
         }
-
-        stage('Operate') {
-            steps {
-                script {
-                    // Menjalankan playbook Ansible
-                    ansiblePlaybook credentialsId: 'your-ansible-credentials-id', inventory: 'path/to/your/inventory', playbook: 'path/to/your/playbook.yml'
-                }
-            }
-        }
     }
 
     post {
