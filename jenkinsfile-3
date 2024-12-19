@@ -1,0 +1,14 @@
+pipeline{
+agent{ label 'linux'}
+environment{
+ANSIBLE_PRIVATE_KEY= credentials('mariadb-private-key')
+}
+stages{
+stage('Hello') {
+steps {
+sh 'ansible-galaxy collection install -r requirement.yml'
+sh ' ansible-playbook -i inventory /mariadb.hots --private-key=$ANSIBLE_PRIVATE_KEY playbooks/mariadb.yml'
+}
+}
+}
+}
