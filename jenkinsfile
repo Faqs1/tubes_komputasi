@@ -4,31 +4,18 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-             
+                echo 'Building...'
             }
         }
-
-        stage('Deploy') {
-            steps {
-                script {
-                  
-                }
-            }
-
         stage('Test') {
             steps {
-                script {
-                  
-                }
+                echo 'Testing...'
             }
         }
-    }
-
-    post {
-        always {
-            archiveArtifacts artifacts: '**/target/*.jar', allowEmptyArchive: true
-            junit 'target/surefire-reports/*.xml'
+        stage('Deploy') {
+            steps {
+                echo 'Deploying...'
+            }
         }
     }
 }
-
