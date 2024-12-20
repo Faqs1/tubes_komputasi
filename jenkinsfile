@@ -1,27 +1,28 @@
 pipeline {
     agent any
-
     stages {
-        stage('Build') {
+        stage('Clone Repository') {
             steps {
-                echo 'Building...'
-                // Tambahkan langkah build Anda di sini, misalnya:
-                // sh 'mvn clean install'
+                git 'https://github.com/username/repository.git'
             }
         }
-        stage('Test') {
+        stage('Install Dependencies') {
             steps {
-                echo 'Testing...'
-                // Tambahkan langkah test Anda di sini, misalnya:
-                // sh 'mvn test'
+                sh 'ansible-galaxy install -r requirements.yml'
             }
         }
-        stage('Deploy') {
+        stage('Run Ansible Playbook') {
             steps {
-                echo 'Deploying...'
-                // Tambahkan langkah deploy Anda di sini, misalnya:
-                // sh 'scp target/*.jar user@server:/path/to/deploy'
+                ansiblePlaybook credentialsId: 'your-credentials-id', inventory: 'hosts', playbook: 'playbooks/mariadb.yml'
             }
+        }
+    }
+    post {
+        success {
+            echo 'Deployment successful!'
+        }
+        failure {
+            echo 'Deployment failed!'
         }
     }
 }
