@@ -4,15 +4,21 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                git credentialsId: 'appPassword',git 'https://github.com/tubes_komputasi.git'
-                sh 'mvn clean install' 
+             
             }
         }
 
         stage('Deploy') {
             steps {
                 script {
-                    docker.build('tubes').push('tubes')
+                  
+                }
+            }
+
+        stage('Test') {
+            steps {
+                script {
+                  
                 }
             }
         }
