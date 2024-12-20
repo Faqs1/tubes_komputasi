@@ -5,16 +5,22 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building...'
+                // Tambahkan langkah build Anda di sini, misalnya:
+                // sh 'mvn clean install'
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing...'
+                // Tambahkan langkah test Anda di sini, misalnya:
+                // sh 'mvn test'
             }
         }
         stage('Deploy') {
             steps {
                 echo 'Deploying...'
+                // Tambahkan langkah deploy Anda di sini, misalnya:
+                // sh 'scp target/*.jar user@server:/path/to/deploy'
             }
         }
     }
